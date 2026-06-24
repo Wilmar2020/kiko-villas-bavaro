@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiko Villas Bávaro | Sun. Sand. Nightlife.</title>
+    <style>
+        :root {
+            --bg-gradient-start: #e0f2fe;
+            --bg-gradient-end: #bae6fd;
+            --text-dark: #111827;
+            --btn-dark: #0f3d3e;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        /* --- Beach Background --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('Bavaro-bch.png') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(224, 242, 254, 0.82) 0%, rgba(186, 230, 253, 0.78) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Header / Top Bar --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .logo-container img {
+            height: 180px;
+            width: auto;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.03);
+        }
+
+        .lang-selectors {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #374151;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .lang-btn:hover {
+            background: rgba(15, 61, 62, 0.1);
+        }
+
+        .lang-btn.active {
+            color: #0f3d3e;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            font-weight: 700;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
+            color: #0f3d3e;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+        }
+
+        .hero h2 {
+            font-size: 2.3rem;
+            color: #1f2937;
+            font-style: italic;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+        }
+
+        .description {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #1f2937;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.55);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .description ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .description li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 1.02rem;
+        }
+
+        .description li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #0f3d3e;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* --- Google Reviews Badge --- */
+        .reviews-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.7);
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.5);
+            text-decoration: none;
+            color: #1f2937;
+            transition: all 0.2s ease;
+        }
+
+        .reviews-badge:hover {
+            background: rgba(255,255,255,0.9);
+            transform: scale(1.03);
+        }
+
+        .reviews-badge .stars {
+            color: #f59e0b;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .reviews-badge .score {
+            font-weight: 700;
+            color: #0f3d3e;
+        }
+
+        .reviews-badge .count {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* --- Main CTA Button --- */
+        .cta-container {
+            margin-bottom: 2.5rem;
+        }
+
+        .main-cta {
+            display: inline-block;
+            background-color: var(--btn-dark);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.9rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(15, 61, 62, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .main-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(15, 61, 62, 0.4);
+            background-color: #164e4f;
+        }
+
+        .main-cta .title-line {
+            font-size: 1.25rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+
+        .main-cta .subtitle-line {
+            font-size: 0.95rem;
+            display: block;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        /* --- Urgency Banner --- */
+        .urgency-banner {
+            background: linear-gradient(90deg, #fef3c7, #fde68a);
+            color: #92400e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            border: 1px solid #fbbf24;
+        }
+
+        /* --- Room Cards Grid --- */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .room-card {
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .room-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .room-img {
+            width: 100%;
+            height: 200px;
+            background-color: #cbd5e1;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: bold;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-img::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+            pointer-events: none;
+        }
+
+        .room-info {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .room-title-en, .room-title-es {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.8rem;
+        }
+
+        .room-desc {
+            font-size: 0.92rem;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .room-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price-box {
+            font-size: 0.9rem;
+            color: #111827;
+        }
+
+        .price-box strong {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f3d3e;
+        }
+
+        .avail-btn {
+            background-color: var(--btn-dark);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.55rem 1.1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .avail-btn:hover {
+            background-color: #164e4f;
+            transform: scale(1.05);
+        }
+
+        /* --- Testimonial Section --- */
+        .testimonial-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.55);
+            border-radius: 14px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .testimonial-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #374151;
+            max-width: 600px;
+            margin: 0 auto 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #0f3d3e;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* --- Video Section --- */
+        .video-section {
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            background: #000;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 177.78%; /* 9:16 Aspect Ratio for Shorts */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            background: rgba(255,255,255,0.6);
+            border-radius: 14px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .contact-section h3 {
+            color: #0f3d3e;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: #0f3d3e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #0f3d3e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* --- Language Toggle Display Control --- */
+        [lang="es"] { display: none; }
+        
+        body.show-es [lang="en"] { display: none; }
+        body.show-es [lang="es"] { display: inherit; }
+        body.show-es .rooms-grid { display: grid; }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero h2 { font-size: 1.7rem; }
+            .logo-container img { height: 130px; }
+            .rooms-grid { grid-template-columns: 1fr; }
+            .description { padding: 1.2rem; }
+            .video-wrapper { max-width: 320px; }
+            .contact-grid { flex-direction: column; gap: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero h2 { font-size: 1.4rem; }
+            .logo-container img { height: 110px; }
+            .main-cta { padding: 0.8rem 1.8rem; }
+            .main-cta .title-line { font-size: 1.1rem; }
+            .video-wrapper { max-width: 280px; }
+            .reviews-badge { padding: 6px 12px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="logo-container">
+                <img src="kiko-logo1.png" alt="Kiko Villas Logo">
+            </div>
+            <div class="lang-selectors">
+                <button class="lang-btn" id="btn-es" onclick="setLang('es')">[ ES ]</button>
+                <span style="color:#9ca3af;">|</span>
+                <button class="lang-btn active" id="btn-en" onclick="setLang('en')">[ EN ]</button>
+            </div>
+        </header>
+
+        <div class="hero">
+            <h1>Sun. Sand. Nightlife.</h1>
+            <h2>Sol. Arena. Vida Nocturna.</h2>
+
+            <a href="https://www.google.com/travel/search?q=kiki%20villas%20bavaro" target="_blank" class="reviews-badge">
+                <span class="stars">★★★★★</span>
+                <span class="score">5.0</span>
+                <span class="count" lang="en">Google Reviews</span>
+                <span class="count" lang="es">Reseñas de Google</span>
+            </a>
+
+            <div class="description">
+                <div lang="en">
+                    <ul>
+                        <li><strong>Modern comfort</strong> in the heart of Bávaro.</li>
+                        <li><strong>Prime location:</strong> Directly facing Hyatt and Dreams Secrets resorts.</li>
+                        <li><strong>Convenience:</strong> Just a 7-minute walk to Downtown Bávaro and the beach.</li>
+                        <li><strong>Golf access:</strong> Right next door to Cocotal Golf and Country Club.</li>
+                    </ul>
+                </div>
+                <div lang="es">
+                    <ul>
+                        <li><strong>Confort moderno</strong> en el corazón de Bávaro.</li>
+                        <li><strong>Ubicación privilegiada:</strong> Frente a los resorts Hyatt y Dreams Secrets.</li>
+                        <li><strong>Conveniencia:</strong> A solo 7 minutos a pie del centro de Bávaro y la playa.</li>
+                        <li><strong>Golf:</strong> Justo al lado del Cocotal Golf and Country Club.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="urgency-banner" lang="en">🔥 High season fills fast — Nov to Mar</div>
+            <div class="urgency-banner" lang="es">🔥 Temporada alta se llena rápido — Nov a Mar</div>
+
+            <div class="cta-container">
+                <a href="#rooms" class="main-cta">
+                    <span lang="en">
+                        <span class="title-line">View Rooms & Book Now</span>
+                        <span class="subtitle-line">Ver Habitaciones y Reservar</span>
+                    </span>
+                    <span lang="es">
+                        <span class="title-line">Ver Habitaciones y Reservar</span>
+                        <span class="subtitle-line">View Rooms & Book Now</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="rooms-grid" id="rooms">
+            <script>
+                for(let i=1; i<=5; i++) {
+                    document.write(`
+                        <div class="room-card">
+                            <div class="room-img" style="background-image: url('kiko-hotel3.jpg');">
+                                <span style="position:relative; z-index:2; background:rgba(0,0,0,0.5); color:#fff; padding:4px 12px; border-radius:20px; font-size:0.85rem;">Unit ${i}</span>
+                            </div>
+                            <div class="room-info">
+                                <div class="room-title-en" lang="en">Standard Double Room</div>
+                                <div class="room-title-es" lang="es">Habitación Doble Estándar</div>
+                                <p class="room-desc" lang="en">Two double bed units $95 per night. Includes two simple Dominican lunches between 12:00 and 2:00 p.m. (No exceptions).</p>
+                                <p class="room-desc" lang="es">Unidad de dos camas dobles $95 por noche. Incluye dos almuerzos dominicanos sencillos entre 12:00 y 2:00 p.m. (Sin excepciones).</p>
+                                <div class="room-footer">
+                                    <div class="price-box">from <strong>$95</strong>/night</div>
+                                    <a href="https://wa.me/529878785284?text=Hi,%20I'm%20interested%20in%20booking%20a%20room%20at%20Kiko%20Villas%20Bávaro" class="avail-btn" target="_blank">
+                                        <span lang="en">Check Availability</span>
+                                        <span lang="es">Ver Disponibilidad</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+
+        <div class="testimonial-section">
+            <p class="testimonial-text" lang="en">"I lived here for 2 years. Best location in Bávaro — walk to the beach, golf next door, and the Hyatt resorts right across the street. You won't find a better spot at this price."</p>
+            <p class="testimonial-text" lang="es">"Viví aquí por 2 años. La mejor ubicación en Bávaro — camina a la playa, golf al lado, y los resorts Hyatt justo al frente. No encontrarás un mejor lugar a este precio."</p>
+            <p class="testimonial-author">Kiko Villas Host</p>
+            <p class="testimonial-role" lang="en">Owner & Local Expert</p>
+            <p class="testimonial-role" lang="es">Propietario & Experto Local</p>
+        </div>
+
+        <section class="video-section">
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Ys-3d1i06iA?rel=0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen 
+                        title="Kiko Villas Video">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <div class="contact-section">
+            <h3 lang="en">📞 Contact Us</h3>
+            <h3 lang="es">📞 Contáctanos</h3>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="https://wa.me/529878785284" target="_blank">+52 987 878 5284</a>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span lang="en">Bávaro, Punta Cana, DR</span>
+                    <span lang="es">Bávaro, Punta Cana, RD</span>
+                </div>
+                <div class="contact-item">
+                    <span>✉️</span>
+                    <a href="mailto:info@kikovillasbavaro.com">info@kikovillasbavaro.com</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p lang="en">© 2026 Kiko Villas Bávaro. All rights reserved.</p>
+            <p lang="es">© 2026 Kiko Villas Bávaro. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            const body = document.body;
+            const btnEn = document.getElementById('btn-en');
+            const btnEs = document.getElementById('btn-es');
+
+            if (lang === 'es') {
+                body.classList.add('show-es');
+                btnEs.classList.add('active');
+                btnEn.classList.remove('active');
+            } else {
+                body.classList.remove('show-es');
+                btnEn.classList.add('active');
+                btnEs.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
